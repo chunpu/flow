@@ -1,0 +1,6 @@
+language: erlang
+
+install:
+    - sudo apt-get install lua5.1
+
+script: bash test.sh
