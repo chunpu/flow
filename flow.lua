@@ -4,7 +4,7 @@ return function (arr, ...)
     local args = {...}
     local i = 0
     local len = #arr
-    return function()
+    local safe = function()
         function down(ok)
             if len <= i then return end
             i = i + 1
@@ -13,13 +13,18 @@ return function (arr, ...)
             if tp == 'function' then
                 x(down, unpack(args))
             elseif tp == 'thread' then
-                local chain, ret = coroutine.resume(x, down, unpack(args))
-                if chain and ret == down then
+                local ok, ret = coroutine.resume(x, down, unpack(args))
+                assert(ok, ret)
+                if ret == down then
                     down()
-                    coroutine.resume(x, down, unpack(args))
+                    local ok, msg = coroutine.resume(x, down, unpack(args))
+                    assert(ok, msg)
                 end
             end
         end
         down()
+    end
+    return function()
+        return pcall(safe)
     end
 end

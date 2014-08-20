@@ -17,6 +17,7 @@ local arr = {
     thread1,
     function(down)
         table.insert(actual, 1)
+        assert(false, 'customerror')
         down()
     end,
     thread2,
@@ -26,14 +27,17 @@ local arr = {
     end,
 }
 
-local expect = {'thread1-down', 1, 'thread2-down', 2, 'thread2-up', 'thread1-up'}
+local expect = {'thread1-down', 1}
 
 local ok, msg = flow(arr)()
-assert(ok)
 
+assert(ok == false)
+assert(type(msg) == 'string')
+assert(msg:find('customerror'))
 assert(#expect == #actual)
+
 for i = 1, #expect do
     assert(actual[i] == expect[i])
 end
 
-print('basic test ok!')
+print('error catch test ok!')
