@@ -1,6 +1,6 @@
 -- koa style downstream and upstream
 
-function flow(arr, ...)
+return function (arr, ...)
     local args = {...}
     local i = 0
     local len = #arr
@@ -23,5 +23,3 @@ function flow(arr, ...)
         down()
     end
 end
-
-return flow
