@@ -25,6 +25,8 @@ return function (arr, ...)
         down()
     end
     return function()
-        return pcall(safe)
+        return xpcall(safe, function(err)
+            return debug.traceback(err, 2)
+        end)
     end
 end
