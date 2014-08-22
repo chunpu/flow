@@ -1,6 +1,6 @@
 -- koa style downstream and upstream
 
-return function (arr, ...)
+return function(arr, ...)
     local args = {...}
     local i = 0
     local len = #arr
