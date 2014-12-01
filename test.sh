@@ -1,5 +1,6 @@
 lua basic.test.lua &&
 lua basic2.test.lua &&
+lua basic3.test.lua &&
 lua args.test.lua &&
 lua yieldstop.test.lua &&
 lua funcstop.test.lua &&

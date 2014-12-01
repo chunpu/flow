@@ -5,7 +5,7 @@ return function(arr, ...)
     local i = 0
     local len = #arr
     local safe = function()
-        function down(ok)
+        local function down(ok)
             if len <= i then return end
             i = i + 1
             local x = arr[i]
